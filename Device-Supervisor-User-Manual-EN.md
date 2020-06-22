@@ -115,15 +115,15 @@ The whole process is shown in the figure below:
 
 ### 1.2 Configure the LAN parameters to access PLC in a LAN
 
-- The default IP address of IG902's GE 0/2 port is `192.168.2.1`. To enable IG902 to access the Ethernet-based PLC over the GE 0/2 port, you need to set the GE 0/2 port to be in the same network segment of the PLC. For more information about the setting method, see [Access IG902 in a LAN.](http://fw.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-lan-parameters-access-the-ig902-through-lan)
-- The default IP address of IG501's FE 0/1 port is `192.168.1.1`. To enable IG501 to access the Ethernet-based PLC over the FE 0/1 port, you need to set the FE 0/1 port to be in the same network segment of the PLC. For more information about the setting method, see [Access IG501 in a LAN.](http://fw.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-lan-parameters-access-the-ig501-through-lan)
+- The default IP address of IG902's GE 0/2 port is `192.168.2.1`. To enable IG902 to access the Ethernet-based PLC over the GE 0/2 port, you need to set the GE 0/2 port to be in the same network segment of the PLC. For more information about the setting method, see [Access IG902 in a LAN](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-lan-parameters-access-the-ig902-through-lan).
+- The default IP address of IG501's FE 0/1 port is `192.168.1.1`. To enable IG501 to access the Ethernet-based PLC over the FE 0/1 port, you need to set the FE 0/1 port to be in the same network segment of the PLC. For more information about the setting method, see [Access IG501 in a LAN](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-lan-parameters-access-the-ig501-through-lan).
 
 <a id="set-wan-network-parameters"> </a>
 
 ### 1.3 Configure the WAN parameters to transmit data to the MQTT server
 
-- Configure the IG902 WAN parameters by referring to [Connect IG902 to the Internet](http://fw.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-wan-parameters-connect-ig902-to-the-internet).
-- Configure the IG501 WAN parameters by referring to [Connect IG501 to the Internet](http://fw.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-wan-parameters-connect-ig501-to-the-internet).
+- Configure the IG902 WAN parameters by referring to [Connect IG902 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-wan-parameters-connect-ig902-to-the-internet).
+- Configure the IG501 WAN parameters by referring to [Connect IG501 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-wan-parameters-connect-ig501-to-the-internet).
 
 <a id="update-ingateway-device-software-version"> </a>
 
@@ -131,8 +131,8 @@ The whole process is shown in the figure below:
 
 If you want to get the latest InGateway and its functional characteristics, contact Customer Services. To update the software version, see the following links:
 
-- [Update the IG902 software version](http://fw.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG902's firmware version must be `V2.0.0.r12537` or later, and the SDK version must be `py3sdk-V1.3.5` or later.
-- [Update the IG501 software version](http://fw.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#update-the-software)
+- [Update the IG902 software version](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG902's firmware version must be `V2.0.0.r12537` or later, and the SDK version must be `py3sdk-V1.3.5` or later.
+- [Update the IG501 software version](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#update-the-software)
 
 <a id="configuration_device_supervisor_app"> </a>
 
@@ -1365,7 +1365,7 @@ You can choose **Edge Computing > Device Supervisor > Global Parameter** and con
 
 ### Other gateway operations
 
-For more information about other common gateway operations, see [Get Started with IG501](http://fw.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html) or [Get Started with IG902](http://fw.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
+For more information about other common gateway operations, see [Get Started with IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html) or [Get Started with IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
 
 <a id="thingsBoard_reference_flowchart"> </a>
 
