@@ -3,7 +3,7 @@
 Device Supervisor App (Device Supervisor) allows users to collect and process data and upload data to the cloud conveniently and supports data parsing over multiple industrial protocols such as ISO on TCP and ModbusRTU. This manual takes collecting PLC data and uploading it to the ThingsBoard cloud platform as an example to describe how to collect PLC data and upload it to the cloud through Device Supervisor App. Hereinafter, InGateway501 is referred to as **IG501** and InGateway902 is referred to as **IG902**.
 
   - [Overview](#overview)
-  - [](#prepare-hardware-equipment-and-its-data-collection-environment)
+  - [1. Prepare the hardware and data collection environment](#prepare-hardware-equipment-and-its-data-collection-environment)
     - [1.1 Hardware wiring](#hardware-wiring)
       - [1.1.1 Ethernet wiring](#ethernet-wiring)
       - [1.1.2 Serial port wiring](#serial-wiring)
