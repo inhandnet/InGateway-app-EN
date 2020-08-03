@@ -3,13 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-=====================================
-Device Supervisor User Manual
-=====================================
+======================================================
+Device Supervisor(Data collecting and uploading)
+======================================================
 
-----------------------
+------------------------------------------------
 InGateway Documentation Site Navigation
-----------------------
+------------------------------------------------
 
 .. raw:: html
 
