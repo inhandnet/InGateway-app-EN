@@ -47,4 +47,6 @@ The Device Supervisor App provides users with convenient and reliable data colle
    :caption: Developer Guide
 
    Device-Supervisor-User-Manual-EN.md
+   AWSIoT-EN.md
+   AzureIoT-EN.md
 
