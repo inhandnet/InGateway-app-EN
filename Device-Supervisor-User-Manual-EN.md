@@ -134,7 +134,7 @@ The whole process is shown in the figure below:
 If you want to get the latest InGateway and its functional characteristics, contact Customer Services. To update the software version, see the following links:
 
 - [Update the IG902 software version](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG902's firmware version must be `V2.0.0.r12537` or later, and the SDK version must be `py3sdk-V1.3.5` or later.
-- [Update the IG501 software version](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#update-the-software)
+- [Update the IG501 software version](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG501's firmware version must be `V2.0.0.r12884` or later, and the SDK version must be `py3sdk-V1.4.0` or later.
 
 <a id="configuration_device_supervisor_app"> </a>
 
