@@ -247,25 +247,25 @@ The parameters are described as follows:
   
   The message publishing parameters are described as follows:
 
-- `Name`: custom publication name.
+  - `Name`: custom publication name.
 
-- `Topic`: publication topic, which must be consistent with the topic that the MQTT server subscribes to.
+  - `Topic`: publication topic, which must be consistent with the topic that the MQTT server subscribes to.
 
-- `Qos(MQTT)`: publication QoS, which is recommended to be consistent with that of the MQTT server.
+  - `Qos(MQTT)`: publication QoS, which is recommended to be consistent with that of the MQTT server.
   
-  - `0`: The message is sent only once, without retry.
-  - `1`: The message is sent at least once to ensure that it reaches the MQTT server.
+    - `0`: The message is sent only once, without retry.
+    - `1`: The message is sent at least once to ensure that it reaches the MQTT server.
 
-- `Group Type`: when publishing variable data, select **Collection**. Then, only **Collection Group** is available in `Group`. When publishing alarm data, select **Alarm**. Then, only **Alarm Group** is available in `Group`.
+  - `Group Type`: when publishing variable data, select **Collection**. Then, only **Collection Group** is available in `Group`. When publishing alarm data, select **Alarm**. Then, only **Alarm Group** is available in `Group`.
 
-- `Group`: after a group is selected, all variables in this group are uploaded to the MQTT server according to the publication configuration. If you select multiple groups, the script logic in the publication is executed for the variables in each group at the collection interval of the groups. <font color=#FF0000>The group must include variables. Otherwise, the script logic in the publication is not executed.</font>
+  - `Group`: after a group is selected, all variables in this group are uploaded to the MQTT server according to the publication configuration. If you select multiple groups, the script logic in the publication is executed for the variables in each group at the collection interval of the groups. <font color=#FF0000>The group must include variables. Otherwise, the script logic in the publication is not executed.</font>
 
-- `Main Function`: name of the main function (entry function), which must be consistent with that in the script.
+  - `Main Function`: name of the main function (entry function), which must be consistent with that in the script.
 
-- `Script`: uses Python code to customize the packaging and processing logic. The main function parameters are as follows:
+  - `Script`: uses Python code to customize the packaging and processing logic. The main function parameters are as follows:
   
-  - `Parameter 1`: same as `Parameter 1` in the main function of [Standard MQTT-Publishing](http://app.ig.inhandnetworks.com/en/latest/Device-Supervisor-User-Manual-EN.html#publish).
-  - `Parameter 2`: AWS IoT API of the Device Supervisor. For details, see [Device Supervisor AWS IoT API Description](#aws-iot-api-interface-description-of-device-supervisor).
+    - `Parameter 1`: same as `Parameter 1` in the main function of [Standard MQTT-Publishing](http://app.ig.inhandnetworks.com/en/latest/Device-Supervisor-User-Manual-EN.html#publish).
+    - `Parameter 2`: AWS IoT API of the Device Supervisor. For details, see [Device Supervisor AWS IoT API Description](#aws-iot-api-interface-description-of-device-supervisor).
 
 - Step 2: Subscribe to messages in the AWS IoT.
   
