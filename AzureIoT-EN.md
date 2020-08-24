@@ -20,6 +20,8 @@ The edge computing gateway InGateway902 (IG902 for short) provides the Device Su
     - [Example of Publishing Messages to the Azure IoT](#publish-azure-iot-message-example)
     - [Example of Subscribing to Azure IoT Messages](#sample-subscription-to-azure-iot-messages)
     - [Device Supervisor Azure IoT API Description](#azure-iot-api-interface-description-of-device-supervisor)
+  - [FAQ](#faq)
+    - [Q1: The Azure IoT Connection Frequently Fails Shortly After It Is Established](#q1)
 
 <a id="prerequisites"> </a>
 
@@ -439,6 +441,8 @@ For details about the basic `wizard_api` configuration, see [Device Supervisor A
       ```
 
 ## FAQ
+
+<a id="q1"> </a>
 
 ### Q1: The Azure IoT Connection Frequently Fails Shortly After It Is Established
 
