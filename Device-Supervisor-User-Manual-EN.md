@@ -7,8 +7,8 @@ Device Supervisor App (Device Supervisor) allows users to collect and process da
     - [1.1 Hardware wiring](#hardware-wiring)
       - [1.1.1 Ethernet wiring](#ethernet-wiring)
       - [1.1.2 Serial port wiring](#serial-wiring)
-    - [1.2 Configure the LAN parameters to access PLC in a LAN](#set-lan-network-parameters)
-    - [1.3 Configure the WAN parameters to transmit data to the MQTT server](#set-wan-network-parameters)
+    - [1.2 Configure InGateway to access PLC](#set-lan-network-parameters)
+    - [1.3 Configure InGateway to connect Internet](#set-wan-network-parameters)
     - [1.4 Update the InGateway software version](#update-ingateway-device-software-version)
   - [2. Configure Device Supervisor App](#configuration_device_supervisor_app)
     - [2.1 Install and run Device Supervisor](#install_and_run_device_supervisor)
@@ -21,7 +21,7 @@ Device Supervisor App (Device Supervisor) allows users to collect and process da
     - [3.1 Monitor the PLC data locally](#local-monitor-plc-data)
       - [3.1.1 Monitor data collection locally](#local-monitoring-data-collection)
       - [3.1.2 Monitor the alarm locally](#local-monitoring-alarm)
-    - [3.2 Monitor the PLC data on ThingsBoard](#monitor-plc-data-on-thingsboard)
+    - [3.2 Monitor the PLC data on cloud](#monitor-plc-data-on-thingsboard)
       - [3.2.1 Configure ThingsBoard](#configure-thingsboard)
       - [3.2.2 Configure a cloud service](#configure-cloud-service)
   - [Appendix](#appendix)
@@ -32,12 +32,14 @@ Device Supervisor App (Device Supervisor) allows users to collect and process da
       - [Device Supervisor API description](#device_supervisor_api_description)
       - [Callback function description](#callback-function-description)
     - [Global parameters](#global_parameters)
-    - [Other gateway operations](#other_gateway_operations)
+    - [Gateway other configuration](#other-gateway-operations)
     - [ThingsBoard reference flowchart](#thingsBoard_reference_flowchart)
       - [Add devices and assets](#add_devices_and_assets)
       - [Transmit the PLC data to ThingsBoard devices](#transmit_the_plc_data_to_thingsBoard_devices)
       - [Configure a visual dashboard](#configure_a_visual_dashboard)
   - [FAQ](#faq)
+    - [Check whether the cloud service script is correct](#check-if-the-cloud-service-script-correct)
+    - [Check whether the App's cloud service output is correct](#check-if-the-app-cloud-service-output-correct)
 
 <a id="overview"> </a>
 
@@ -63,8 +65,8 @@ The whole process is shown in the figure below:
 ## 1. Prepare the hardware and data collection environment
 
 - [1.1 Hardware wiring](#hardware-wiring)
-- [1.2 Configure the LAN parameters to access PLC in a LAN](#set-lan-network-parameters)
-- [1.3 Configure the WAN parameters to transmit data to the MQTT server](#set-wan-network-parameters)
+- [1.2 Configure InGateway to access PLC](#set-lan-network-parameters)
+- [1.3 Configure InGateway to connect Internet](#set-wan-network-parameters)
 - [1.4 Update the InGateway software version](#update-ingateway-device-software-version)
 
 <a id="hardware-wiring"> </a>
@@ -99,7 +101,7 @@ The whole process is shown in the figure below:
   
   The following figure describes how to connect serial port terminals of IG902:
   
-  ![](images/2020-06-15-19-05-41.png)
+  ![](images/2020-07-13-11-36-38.png)
 
 - Serial port wiring for IG501
   
@@ -109,21 +111,21 @@ The whole process is shown in the figure below:
   
   The following figure describes how to connect serial port terminals of IG501:
   
-  ![](images/2020-06-15-19-06-03.png)
+  ![](images/2020-07-16-13-46-32.png)
 
 <a id="set-lan-network-parameters"> </a>
 
-### 1.2 Configure the LAN parameters to access PLC in a LAN
+### 1.2 Configure InGateway to access PLC
 
-- The default IP address of IG902's GE 0/2 port is `192.168.2.1`. To enable IG902 to access the Ethernet-based PLC over the GE 0/2 port, you need to set the GE 0/2 port to be in the same network segment of the PLC. For more information about the setting method, see [Access IG902 in a LAN](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-lan-parameters-access-the-ig902-through-lan).
-- The default IP address of IG501's FE 0/1 port is `192.168.1.1`. To enable IG501 to access the Ethernet-based PLC over the FE 0/1 port, you need to set the FE 0/1 port to be in the same network segment of the PLC. For more information about the setting method, see [Access IG501 in a LAN](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-lan-parameters-access-the-ig501-through-lan).
+- The default IP address of IG902's GE 0/2 port is `192.168.2.1`. To enable IG902 to access the Ethernet-based PLC over the GE 0/2 port, you need to set the GE 0/2 port to be in the same network segment of the PLC. For more information about the setting method, see [Access the IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-lan-parameters).
+- The default IP address of IG501's FE 0/1 port is `192.168.1.1`. To enable IG501 to access the Ethernet-based PLC over the FE 0/1 port, you need to set the FE 0/1 port to be in the same network segment of the PLC. For more information about the setting method, see [Access the IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-lan-parameters).
 
 <a id="set-wan-network-parameters"> </a>
 
-### 1.3 Configure the WAN parameters to transmit data to the MQTT server
+### 1.3 Configure InGateway to connect Internet
 
-- Configure the IG902 WAN parameters by referring to [Connect IG902 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-wan-parameters-connect-ig902-to-the-internet).
-- Configure the IG501 WAN parameters by referring to [Connect IG501 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-wan-parameters-connect-ig501-to-the-internet).
+- Configure the IG902 to connect Internet by referring to [Connect IG902 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-wan-parameters).
+- Configure the IG501 to connect Internet by referring to [Connect IG501 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-wan-parameters).
 
 <a id="update-ingateway-device-software-version"> </a>
 
@@ -145,11 +147,11 @@ If you want to get the latest InGateway and its functional characteristics, cont
 
 ### 2.1 Install and run Device Supervisor
 
-- Install and run Python apps on IG902 by referring to [Install and run Python apps on IG902](https://ingateway-development-docs.readthedocs.io/zh_CN/latest/IG902%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C.html#python-app). After Device Supervisor runs normally, the following figure is displayed:
+- Install and run Python apps on IG902 by referring to [Install and run Python apps on IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
   
   ![](images/2020-06-02-14-17-49.png)
 
-- Install and run Python apps on IG501 by referring to [Install and run Python apps on IG501](https://ingateway-development-docs.readthedocs.io/zh_CN/latest/IG501%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C.html#python-app). After Device Supervisor runs normally, the following figure is displayed:
+- Install and run Python apps on IG501 by referring to [Install and run Python apps on IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
   
   ![](images/2020-06-02-14-17-49.png)
 
@@ -392,7 +394,7 @@ To configure different collection intervals for a variable or an alarm or report
 ## 3. Monitor the PLC data
 
 - [3.1 Monitor the PLC data locally](#local-monitor-plc-data)
-- [3.2 Monitor the PLC data on ThingsBoard](#monitor-plc-data-on-thingsboard)
+- [3.2 Monitor the PLC data on cloud](#monitor-plc-data-on-thingsboard)
 
 <a id="local-monitor-plc-data"> </a>
 
@@ -435,7 +437,7 @@ After configuring the alarm policy, choose **Edge Computing > Device Supervisor 
 
 <a id="monitor-plc-data-on-thingsboard"> </a>
 
-### 3.2 Monitor the PLC data on ThingsBoard
+### 3.2 Monitor the PLC data on cloud
 
 - [3.2.1 Configure ThingsBoard](#configure-thingsboard)
 - [3.2.2 Configure cloud service](#configure-cloud-service)
@@ -528,7 +530,7 @@ Then, click **Advanced Settings** to configure the publish and subscribe topics.
 - [Importing/exporting configuration](#Importing_exporting_configuration)
 - [Advanced settings (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe)
 - [Global parameters](#global_parameters)
-- [Other gateway operations](#other_gateway_operations)
+- [Gateway other configuration](#other-gateway-operations)
 - [ThingsBoard reference flowchart](#thingsBoard_reference_flowchart)
 
 <a id="Importing_exporting_configuration"> </a>
@@ -613,7 +615,7 @@ You can choose **Edge Computing > Device Supervisor > Cloud Service** and config
 
 #### Publish
 
-To customize a publish topic, configure the following items:
+To customize a publish message, configure the following items:
 
 - `Name`: The custom publish name.
 - `Topic`: The publish topic, which must be consistent with the topic subscribed to by the MQTT server.
@@ -632,7 +634,7 @@ To customize a publish topic, configure the following items:
       ```python
       {
           'timestamp': 1589434519.5458372,  #The timestamp when data is generated.
-          'group_name': 'default'  #The name of the collect group.
+          'group_name': 'default',  #The name of the collect group.
           'values':  #The variable data dictionary, including the PLC name, variable name, and variable value.
           {
               'S7-1200':  #The PLC name.
@@ -648,7 +650,7 @@ To customize a publish topic, configure the following items:
                       'status': 1
                   }
               }
-          },
+          }
       }
       ```
     
@@ -657,7 +659,7 @@ To customize a publish topic, configure the following items:
       ```python
       {
           'timestamp': 1589434527.3628697,  #The timestamp when an alarm is generated.
-          'group_name': 'warning'  #The name of the alarm group.
+          'group_name': 'warning',  #The name of the alarm group.
           'values':  #The alarm data dictionary, including the alarm information such as alarm name.
           {
               'Warn1':  #The alarm name.
@@ -669,7 +671,7 @@ To customize a publish topic, configure the following items:
                   'alarm_content': 'The speed has exceeded 30.',  #The alarm description.
                   'level': 1  #The reserved field.
               }
-          },
+          }
       }
       ```
   
@@ -975,7 +977,7 @@ The following are examples of common custom publish methods.<font color=#FF0000>
 
 #### Subscribe
 
-Custom subscribe contains the following items:
+Custom subscribe message contains the following items:
 
 - `Name`: The custom subscribe name.
 - `Topic`: The subscribe topic, which must be consistent with the topic published by the MQTT server.
@@ -1141,7 +1143,7 @@ The API provided by Device Supervisor supports the following methods:
       ```
   - `Parameter 2` (`callback` is optional): The name of the callback function that returns the modification result. For more information about the callback function, see [Description of the write_plc_values callback function.](#write-plc-values-callback-function-description)
   - `Parameter 3` (`tail` is optional): When `Parameter 2` is available, you can assign the data that needs to be sent to the callback function returning the modification result to `Parameter 3`.
-  - `Parameter 4` (`timeout` is optional): The write timeout time. The data type is `Integer`. The default value is 60s.
+  - `Parameter 4` (`timeout` is optional): The write timeout time. The data type is `Integer` or `float`. The default value is 60s.
 
 - `get_tag_config`: The method to get the configurations, including the PLC, variable, group, and alarm configurations. For its usage example, see [Publish example 5](#pub-example5). This method contains the following parameters:
   - `Parameter 1`: The name of the callback function that gets the configuration. For more information about the callback function, see [Description of the get_tag_config callback function.](#get-tag-config-callback-function-description)
@@ -1188,7 +1190,6 @@ The API provided by Device Supervisor supports the following methods:
           'result': 'OK', #The written result. OK: writing succeeded; Failed: writing failed.
           'error': '' #The writing error. When the writing result is OK, this parameter is empty.
       }]
-      ```;
       ```
     - When write failed, the format of the returned value is:
       ```python
@@ -1361,9 +1362,9 @@ You can choose **Edge Computing > Device Supervisor > Global Parameter** and con
   
   ![](images/2020-06-02-20-43-26.png)
 
-<a id="other_gateway_operations"> </a>
+<a id="other-gateway-operations"> </a>
 
-### Other gateway operations
+### Gateway other configuration
 
 For more information about other common gateway operations, see [Get Started with IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html) or [Get Started with IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
 
@@ -1504,8 +1505,12 @@ Then, you can view the uploaded data in the latest telemeter of the device.
 <a id="faq"> </a>
 
 ## FAQ
+- [Check whether the cloud service script is correct](#check-if-the-cloud-service-script-correct)
+- [Check whether the App's cloud service output is correct](#check-if-the-app-cloud-service-output-correct)
 
-- Check whether the cloud service script is correct  
+<a id="check-if-the-cloud-service-script-correct"> </a> 
+
+### Check whether the cloud service script is correct  
   Open the log of Device Supervisor App Write the script and click **OK**. The `Build module: <Main Function Name>, type: <publish/subscribe>` information in the log shows whether the script is built successfully.
   
   If the script is built successfully, the page is as follows:
@@ -1516,7 +1521,9 @@ Then, you can view the uploaded data in the latest telemeter of the device.
   
   ![](images/2020-05-18-17-22-30.png)
 
-- Check whether the App's cloud service output is correct  
+<a id="check-if-the-app-cloud-service-output-correct"> </a> 
+
+### Check whether the App's cloud service output is correct  
   You can use `logger` and `logging` to output important logs. In the following figure, the `logging.info` method is added in the sixth line of the script. You can search for `<string> 6` in the log to check whether the output results meet the expectation.
   
   ![](images/2020-05-18-17-25-03.png)
