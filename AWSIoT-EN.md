@@ -161,7 +161,8 @@ The preparation of the AWS IoT environment is completed.
 
 #### 1.2.1 Basic Configuring
 
-For details about IG902 connection configuration and software version update, see [IG902 Quick Guide](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
+- For details about IG902 connection configuration and software version update, see [IG902 Quick Guide](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
+- For details about IG501 connection configuration and software version update, see [IG501 Quick Guide](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html).
 
 <a id="configure-data-collection"> </a>
 
