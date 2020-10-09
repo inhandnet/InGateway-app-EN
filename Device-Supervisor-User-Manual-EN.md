@@ -10,28 +10,28 @@ Device Supervisor App (Device Supervisor) allows users to collect and process da
     - [1.2 Configure InGateway to access PLC](#set-lan-network-parameters)
     - [1.3 Configure InGateway to connect Internet](#set-wan-network-parameters)
     - [1.4 Update the InGateway software version](#update-ingateway-device-software-version)
-  - [2. Configure Device Supervisor App](#configuration_device_supervisor_app)
+  - [2. Configure data collection for Device Supervisor](#configuration_device_supervisor_app)
     - [2.1 Install and run Device Supervisor](#install_and_run_device_supervisor)
-    - [2.2 Configure data collection for Device Supervisor](#device_supervisor-data-acquisition-configuration)
+    - [2.2 Configure data collection](#device_supervisor-data-acquisition-configuration)
       - [2.2.1 Add a PLC](#add-plc-device)
       - [2.2.2 Add a variable](#add-variables)
       - [2.2.3 Configure an alarm policy](#configure-alarm-strategy)
       - [2.2.4 Configure a group](#configure-group)
-  - [3. Monitor the PLC data](#monitor-plc-data)
+  - [3. Report and monitor the PLC data](#monitor-plc-data)
     - [3.1 Monitor the PLC data locally](#local-monitor-plc-data)
       - [3.1.1 Monitor data collection locally](#local-monitoring-data-collection)
       - [3.1.2 Monitor the alarm locally](#local-monitoring-alarm)
     - [3.2 Monitor the PLC data on cloud](#monitor-plc-data-on-thingsboard)
       - [3.2.1 Configure ThingsBoard](#configure-thingsboard)
-      - [3.2.2 Configure a cloud service](#configure-cloud-service)
+      - [3.2.2 Configure a cloud service to report and receive data](#configure-cloud-service)
   - [Appendix](#appendix)
-    - [Importing/exporting configuration](#Importing_exporting_configuration)
-    - [Advanced settings (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe)
-      - [Publish](#publish)
-      - [Subscribe](#subscribe)
-      - [Device Supervisor API description](#device_supervisor_api_description)
-      - [Callback function description](#callback-function-description)
-    - [Global parameters](#global_parameters)
+    - [Importing/exporting data collection configuration](#Importing_exporting_configuration)
+    - [Messages Management (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe)
+      - [Configure Publish Messages](#publish)
+      - [Configure Subscribe Messages](#subscribe)
+      - [Device Supervisor API Description](#device_supervisor_api_description)
+      - [Device Supervisor API Callback Function Description](#callback-function-description)
+    - [Parameter settings](#global_parameters)
     - [Gateway other configuration](#other-gateway-operations)
     - [ThingsBoard reference flowchart](#thingsBoard_reference_flowchart)
       - [Add devices and assets](#add_devices_and_assets)
@@ -58,7 +58,7 @@ Prepare the following items:
 
 The whole process is shown in the figure below:
 
-![](images/2020-06-22-13-53-53.png)
+![](images/2020-09-28-18-05-08.png)
 
 <a id="prepare-hardware-equipment-and-its-data-collection-environment"> </a>
 
@@ -138,10 +138,10 @@ If you want to get the latest InGateway and its functional characteristics, cont
 
 <a id="configuration_device_supervisor_app"> </a>
 
-## 2. Configure Device Supervisor App
+## 2. Configure data collection for Device Supervisor
 
 - [2.1 Install and run Device Supervisor](#install_and_run_device_supervisor)
-- [2.2 Configure data collection for Device Supervisor](#device_supervisor-data-acquisition-configuration)
+- [2.2 Configure data collection](#device_supervisor-data-acquisition-configuration)
 
 <a id="install_and_run_device_supervisor"> </a>
 
@@ -157,7 +157,7 @@ If you want to get the latest InGateway and its functional characteristics, cont
 
 <a id="device_supervisor-data-acquisition-configuration"> </a>
 
-### 2.2 Configure data collection for Device Supervisor
+### 2.2 Configure data collection
 
 - [2.2.1 Add a PLC](#add-plc-device)
 - [2.2.2 Add a variable](#add-variables)
@@ -204,9 +204,15 @@ If you want to get the latest InGateway and its functional characteristics, cont
   
   ![](images/2020-06-02-14-36-15.png)
   
-  To modify communication parameters for the RS232/RS485 serial port, choose **Edge Computing > Device Supervisor > Global Parameters**, and modify them on the page. After modification, communication parameters of all serial ports are automatically updated to the modified ones.
+  To modify communication parameters for the RS232/RS485 serial port, choose **Edge Computing > Device Supervisor > Parameter Settings**, and modify them on the page. After modification, communication parameters of all serial ports are automatically updated to the modified ones.
   
-  ![](images/2020-06-02-14-36-45.png)
+  ![](images/2020-09-30-15-10-57.png)  
+
+- Add EtherNET/IP device (**App version 1.2.5 or above is required**)
+
+  Choose **Edge Computing > Device Monitoring > Device List**, and click on **Add PLC**. Select **EtherNET/IP** as the PLC protocol on the **Add Device** page, and then configure the communication parameters of the PLC. <font color=#FF0000>Note: The device name must be unique.</font>  
+
+  ![](images/2020-09-30-15-12-28.png)
 
 <a id="add-variables"> </a>
 
@@ -309,7 +315,29 @@ If you want to get the latest InGateway and its functional characteristics, cont
   
   The following figure is an example of adding a floating point variable with the address 40001:
   
-  ![](images/2020-06-02-14-44-48.png)
+  ![](images/2020-06-02-14-44-48.png)  
+
+- Add EtherNETIP variable (**App version 1.2.5 and above required**)
+  
+  Click **Add Variable** button on the **Device List** page. To configure the parameters of EtherNET/IP variablse in the add variable pop-up box. <font color=#FF0000>It is unnecessary to configure the data type. The Device Supervisor will judge the data type by itself. (Currently supported EIP data types include 'BOOL' 'SINT' 'INT' 'DINT' 'REAL' 'STRING')</font>：  
+
+  - Variable name: the name of the variable. <font color=#FF0000>(variable name cannot be repeated under the same device)</font>
+  - Label: The label of the variable.
+  - Decimal: The length of data after the decimal point of a variable when the data type is a floating point number up to 6 bits.
+  - Read-write access permission:
+    - Read: Read only, not writable
+    - Write: Write only, not readable
+    - Read/Write: Read and write
+  - Collection mode:
+    - Realtime: Collect variables at fixed collection intervals and report data at reporting intervals.
+    - Onchange: The data is collected and reported according to the reporting interval after the variable value changes.
+  - Unit: Unit of a variable.
+  - Description: Variable description.
+  - Group: The collection group where the variable belongs.
+
+  The following is an example of adding a variable with the label name `ZB.LEN.16`:  
+
+  ![](images/2020-09-30-15-19-11.png)
 
 <a id="configure-alarm-strategy"> </a>
 
@@ -391,7 +419,7 @@ To configure different collection intervals for a variable or an alarm or report
 
 <a id="monitor-plc-data"> </a>
 
-## 3. Monitor the PLC data
+## 3. Report and monitor the PLC data
 
 - [3.1 Monitor the PLC data locally](#local-monitor-plc-data)
 - [3.2 Monitor the PLC data on cloud](#monitor-plc-data-on-thingsboard)
@@ -440,7 +468,7 @@ After configuring the alarm policy, choose **Edge Computing > Device Supervisor 
 ### 3.2 Monitor the PLC data on cloud
 
 - [3.2.1 Configure ThingsBoard](#configure-thingsboard)
-- [3.2.2 Configure cloud service](#configure-cloud-service)
+- [3.2.2 Configure a cloud service to report and receive data](#configure-cloud-service)
 
 <a id="configure-thingsboard"> </a>
 
@@ -450,12 +478,12 @@ For the usage method of ThingsBoard, see [Get Started with ThingsBoard](https://
 
 <a id="configure-cloud-service"> </a>
 
-#### 3.2.2 Configure a cloud service
+#### 3.2.2 Configure a cloud service to report and receive data
 
 Choose **Edge Computing > Device Supervisor > Cloud Service**. Select Enable Cloud Service, configure the MQTT connection parameters, and then click Submit.
 
+- `Type`：The connection of Thingsboard is based on `Standard MQTT`. For more information about how to use `AWS IoT`, please refer to [AWS IoT User Manual](http://app.ig.inhandnetworks.com/en/latest/AWSIoT-EN.html)；For more information about how to use `Azure IoT`, please refer to [Azure IoT User Manual](http://app.ig.inhandnetworks.com/en/latest/AzureIoT-EN.html).
 - `Server Address`: The ThingsBoard demo address is `demo.thingsboard.io`.
-- `Port`: The default value is `1883`.
 - `Client ID`: Any unique ID.
 - `Username`: The access token of the ThingsBoard device. For more information about how to obtain the access token, see [Transmit the PLC data to ThingsBoard.](#transmit_the_plc_data_to_thingsBoard_devices)
 - `Password`: A password consisting of 6-32 bits.
@@ -463,11 +491,11 @@ Choose **Edge Computing > Device Supervisor > Cloud Service**. Select Enable Clo
 
 After the configuration is completed, the page is as follows:
 
-![](images/2020-06-02-16-24-32.png)
+![](images/2020-09-30-15-51-28.png)
 
-Then, click **Advanced Settings** to configure the publish and subscribe topics. For more information about how to configure the publish and subscribe topics, see [Advanced settings (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe) The following is a configuration example:
+Then, click **Messages Management** to configure the publish and subscribe topics. For more information about how to configure the publish and subscribe topics, see [Messages Management (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe) The following is a configuration example:
 
-- Publish topic:
+- Publish messages:
   
   - `Topic`: `v1/devices/me/telemetry`
   - `Qos(MQTT)`: `1`
@@ -493,7 +521,7 @@ Then, click **Advanced Settings** to configure the publish and subscribe topics.
   
   ![](images/2020-06-22-11-59-03.png)
 
-- Subscribe topic
+- Subscribe messages:
   
   - `Topic`: `v1/devices/me/rpc/request/+`
   - `Qos(MQTT)`: `1`
@@ -527,20 +555,19 @@ Then, click **Advanced Settings** to configure the publish and subscribe topics.
 
 ## Appendix
 
-- [Importing/exporting configuration](#Importing_exporting_configuration)
-- [Advanced settings (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe)
-- [Global parameters](#global_parameters)
+- [Importing/exporting data collection configuration](#Importing_exporting_configuration)
+- [Messages Management (custom MQTT publish/subscribe)](#advanced_settings_custom_MQTT_publish_subscribe)
+- [Parameter Settings](#global_parameters)
 - [Gateway other configuration](#other-gateway-operations)
 - [ThingsBoard reference flowchart](#thingsBoard_reference_flowchart)
 
 <a id="Importing_exporting_configuration"> </a>
 
-### Importing/exporting configuration
+### Importing/exporting data collection configuration
 
-Device Supervisor provides three CSV configuration files for data collection configuration. You can quickly configure data collection by importing or exporting configuration files. Each configuration file contains the following items:
+Device Supervisor provides four CSV configuration files for data collection configuration (To use the Alarm policy configuration file function, App version should be`1.2.5` and later). You can quickly configure data collection by importing or exporting configuration files. Each configuration file contains the following items:
 
-- device.csv: The device configuration file, which contains the following parameters:
-  
+- `device.csv`: The device configuration file, which contains the following parameters:
   - `Device Name`: The device name.
   - `Protocol`: The communication protocol, such as `ModbusTCP`.
   - `Ip/Serial`: Enter the IP address for Ethernet devices, and enter `RS485` or `RS232` for serial port devices.
@@ -559,8 +586,7 @@ Device Supervisor provides three CSV configuration files for data collection con
   
   ![](images/2020-05-18-19-35-56.png)
 
-- var.csv: The variable configuration file, which contains the following parameters:
-  
+- `var.csv`: The variable configuration file, which contains the following parameters:
   - `Var Name`: The variable name.
   - `Device`: The device of the variable.
   - `Protocol`: The communication protocol.
@@ -585,8 +611,7 @@ Device Supervisor provides three CSV configuration files for data collection con
   
   ![](images/2020-05-18-19-43-09.png)
 
-- group.csv: The group configuration file, which contains the following parameters:
-  
+- `group.csv`: The group configuration file, which contains the following parameters:
   - `Group Name`: The group name.
   - `Polling Interval`: The collection interval.
   - `Upload Interval`: The upload interval. Left it empty when the group type is `alarm`.
@@ -600,20 +625,47 @@ Device Supervisor provides three CSV configuration files for data collection con
   
   ![](images/2020-05-18-19-44-22.png)
 
+- `warn.csv`: The alarm policy configuration file, which contains the following parameters:  
+  - `Warn Name`: The alarm name.
+  - `Group`: The group.
+  - `Quotes`: Whether to reference the variable. 0 means "use new variable", 1 means "reference existing variable".
+  - `Device`: The device of the alarm variable.
+  - `Var Name`: The referenced variable name. Leave blank when the variable is not referenced.
+  - `Condition1`: The alarm condition 1. Eq means "equal to", Neq means "not equal to", Gt means "greater than", Gne means "greater than or equal to", Lne means "less than or equal to", Lt means "less than".
+  - `Operand1`: The alarm threshold 1.
+  - `Combine Method`: The alarm condition connection mode. None means empty, And means &&, Or means ||
+  - `Condition2`: The alarm condition 2.
+  - `Operand2`: The alarm threshold 2.
+  - `Alarm Content`: The alarm description.
+  - `Register Addr`: The alarm variable address.
+  - `Dbnumber`: The DB number of the variable when the alarm variable register type is DB.
+  - `Data Type`: The alarm variable data type. Leave it blank when configuring EtherNET/IP and OPCUA variables.
+  - `Symbol`: The alarm variable tag name. Need to fill in when configuring EtherNET/IP variables.
+  - `Register Type`: The alarm variable register type.
+  - `Register Bit`: The bit offset of the variable when the data type of the alarm variable is BOOL or BIT.
+  - `Namespace Index`: The namespace index when the alarm variable is the OPCUA protocol.
+  - `Identifier`: The identification when the alarm variable is the OPCUA protocol.
+  - `Identifier Type`: The ID type when the alarm variable is the OPCUA protocol.
+  - `Float Repr`: The number of decimal places.
+
+  The export method is to export alarms on the **Alarm** page.  
+
+  ![](images/2020-09-30-16-36-52.png)
+
 <a id="advanced_settings_custom_MQTT_publish_subscribe"> </a>
 
-### Advanced settings (custom MQTT publish/subscribe)
+### Messages Management (custom MQTT publish/subscribe)
 
-You can choose **Edge Computing > Device Supervisor > Cloud Service** and configure MQTT connection parameters. You can configure the MQTT topic, data source, and other parameters for the data to be uploaded, and customize the data upload and processing logic for the MQTT publish and subscribe topics in Python. In this way, you can perform data upload and delivery with multiple types of MQTT servers without secondary development. The following describes how to use **Advanced Settings**.
+You can choose **Edge Computing > Device Supervisor > Cloud Service** and configure MQTT connection parameters. You can configure the MQTT messages, data source, and other parameters for the data to be uploaded, and customize the data upload and processing logic for the MQTT publish and subscribe topics in Python. In this way, you can perform data upload and delivery with multiple types of MQTT servers without secondary development. The following describes how to use **Messages Management**.
 
-- [Publish](#publish)
-- [Subscribe](#subscribe)
-- [Device Supervisor API description](#device_supervisor_api_description)
-- [Callback function description](#callback-function-description)
+- [Configure Publish Messages](#publish)
+- [Configure Subscribe Messages](#subscribe)
+- [Device Supervisor API Description](#device_supervisor_api_description)
+- [Device Supervisor API Callback Function Description](#callback-function-description)
 
 <a id="publish"> </a>
 
-#### Publish
+#### Configure Publish Messages
 
 To customize a publish message, configure the following items:
 
@@ -691,8 +743,8 @@ The following are examples of common custom publish methods.<font color=#FF0000>
   import logging
   """
   Logs are generally printed in the gateway in the following ways:
-  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the global parameter page.
-  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the global parameter page.
+  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the Parameter Settings page.
+  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the Parameter Settings page.
   """
   
   def vars_upload_test(data_collect, wizard_api): #Define the main function for publish.
@@ -722,8 +774,8 @@ The following are examples of common custom publish methods.<font color=#FF0000>
   import logging
   """
   Logs are generally printed in the gateway in the following ways:
-  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the global parameter page.
-  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the global parameter page.
+  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the Parameter Settings page.
+  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the Parameter Settings page.
   """
   
   def alarms_upload_test(data_collect, wizard_api): #Define the main function for publish.
@@ -755,8 +807,8 @@ The following are examples of common custom publish methods.<font color=#FF0000>
   from datetime import datetime
   """
   Logs are generally printed in the gateway in the following ways:
-  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the global parameter page.
-  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the global parameter page.
+  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the Parameter Settings page.
+  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the Parameter Settings page.
   """
   
   def vars_cache_test(data_collect, wizard_api): #Define the main function for publish.
@@ -792,8 +844,8 @@ The following are examples of common custom publish methods.<font color=#FF0000>
   from datetime import datetime
   """
   Logs are generally printed in the gateway in the following ways:
-  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the global parameter page.
-  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the global parameter page.
+  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the Parameter Settings page.
+  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the Parameter Settings page.
   """
   
   def vars_cache_test(data_collect, wizard_api): #Define the main function for publish.
@@ -818,7 +870,7 @@ The following are examples of common custom publish methods.<font color=#FF0000>
 
 - Publish example 5: Use `get_tag_config` to get the configuration of devices, variables, and alarms.
   
-  In this example, when the app is restarted each time, the configuration of devices, variables, and alarms are gotten through `get_tag_config` respectively and then sent to the MQTT server. The following is an example of publish and code configuration:
+  In this example, when the app is restarted each time, the configuration of devices, variables, and alarms are gotten through `get_tag_config` respectively and then sent to the MQTT server<font color=#FF0000>(This example is only useful for getting Rackslot pattern point tables for ISO on TCP and Modbus)</font>. The following is an example of publish and code configuration:
   
   ![](images/2020-06-22-13-34-07.png)
   
@@ -827,8 +879,8 @@ The following are examples of common custom publish methods.<font color=#FF0000>
   import json
   """
   Logs are generally printed in the gateway in the following ways:
-  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the global parameter page.
-  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the global parameter page.
+  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the Parameter Settings page.
+  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the Parameter Settings page.
   """
   
   IS_UPLOAD_CONFIG = True  #Define a variable to determine whether to acquire and upload the configuration.
@@ -939,9 +991,9 @@ The following are examples of common custom publish methods.<font color=#FF0000>
 
 <a id="pub-example6"> </a>
 
-- Publish example 6: Use `get_global_parameter` to get global parameter settings.
+- Publish example 6: Use `get_global_parameter` to get custom parameter set in Parameter Settings.
   
-  In this example, parameters set in **Global Parameter** are gotten through `device_id`, and the MQTT topic is configured with the wildcard `${device_id}`. The following is an example of publish and code configuration:
+  In this example, custom parameter set in **Parameter Settings** are gotten through `device_id`, and the MQTT topic is configured with the wildcard `${device_id}`. The following is an example of publish and code configuration:
   
   ![](images/2020-06-02-20-41-21.png)
   
@@ -951,18 +1003,18 @@ The following are examples of common custom publish methods.<font color=#FF0000>
   import logging
   """
   Logs are generally printed in the gateway in the following ways:
-  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the global parameter page.
-  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the global parameter page.
+  1.import logging：Use logging.info(XXX) to print logs. Logs printed in this way are not controlled by the log level parameter on the Parameter Settings page.
+  2.from common.Logger import logger：Use logger.info(XXX) to print logs. Logs printed in this way are controlled by the log level parameter on the Parameter Settings page.
   """
   
   def vars_upload_test(data_collect, wizard_api): #Define the main function for publish.
-      global_parameter = wizard_api.get_global_parameter() #Define the global variables.
-      logging.info(global_parameter) #Print the global variables.
+      global_parameter = wizard_api.get_global_parameter() #Define the Custom Parameter variables.
+      logging.info(global_parameter) #Print the Custom Parameter variables.
       value_list = [] #Define the data list.
       for device, val_dict in data_collect['values'].items(): #Traverse the values dictionary. The dictionary contains the device name and the variables of the device.
           value_dict = { #Customize the data dictionary.
                         "Device": device,
-                        "DeviceID": global_parameter["device_id"], #Acquire the device ID defined in global variables.
+                        "DeviceID": global_parameter["device_id"], #Acquire the device ID defined in Custom Parameter.
                         "timestamp": data_collect["timestamp"],
                         "Data": {}
                         }
@@ -975,7 +1027,7 @@ The following are examples of common custom publish methods.<font color=#FF0000>
 
 <a id="subscribe"> </a>
 
-#### Subscribe
+#### Configure Subscribe Messages
 
 Custom subscribe message contains the following items:
 
@@ -1155,7 +1207,7 @@ The API provided by Device Supervisor supports the following methods:
   - `Parameter 2` (`tail` is optional): It can be used to assign the data that needs to be sent to the callback function immediately reading values of all variables to `Parameter 2`.
   - `Parameter 3` (`timeout` is optional): The timeout time for immediately reading values of all variables. The data type is `Integer`. The default value is 60s.
 
-- `get_global_parameter`: The method to get the global parameter settings. For its usage example, see [Publish example 6](#pub-example6). This method returns a dictionary for global parameter settings. The data format is as follows:
+- `get_global_parameter`: The method to get the custom parameter. For its usage example, see [Publish example 6](#pub-example6). This method returns a dictionary for custom parameter. The data format is as follows:
   
   ```python
   {
@@ -1163,13 +1215,13 @@ The API provided by Device Supervisor supports the following methods:
       'log_level': 'INFO', #The log level, which is a system parameter.
       'catch_recording': 100000, #The maximum number of MQTT messages of variables that can be cached.
       'warning_recording': 2000, #The maximum number of MQTT messages of alarms that can be cached.
-      'device_id': '1' #The custom global parameter.
+      'device_id': '1' #The custom parameter.
   }
   ```
 
 <a id="callback-function-description"> </a>
 
-#### Callback function description
+#### Device Supervisor API Callback Function Description
 
 <a id="write-plc-values-callback-function-description"> </a>
 
@@ -1209,7 +1261,7 @@ The API provided by Device Supervisor supports the following methods:
 
 - `get_tag_config` Callback function description  
 `get_tag_config`The callback function contains the following parameters. For its usage example, see [Publish example 5](#pub-example5):
-  - `Parameter 1`: The configuration returned by the `get_tag_config` method. When getting configuration times out, the returned value is `("error", -110, "timeout")`; otherwise, the data format is as follows:
+  - `Parameter 1`: The configuration returned by the `get_tag_config` method. When getting configuration times out, the returned value is `("error", -110, "timeout")`; otherwise, the data format is as follows (Take Rack/slot mode of the ISO-on-TCP protocol as an example):
     
     ```python
     {
@@ -1340,20 +1392,17 @@ The API provided by Device Supervisor supports the following methods:
 
 <a id="global_parameters"> </a>
 
-### Global parameters
+### Parameter Settings
 
-You can choose **Edge Computing > Device Supervisor > Global Parameter** and configure global settings for Device Supervisor.
+You can choose **Edge Computing > Device Supervisor > Parameter Settings** and configure global settings for Device Supervisor.
 
-- Global parameters  
-  In the global parameter module, you can set system parameters for Device Supervisor or add wildcard parameters.
-  
-  - `catch_recording`: The number of MQTT messages of the variable data that can be cached. The default value is `100000`.
-  
-  - `log_level`: The log level. Different logs are displayed in Device Supervisor for different log levels. The default value is `INFO`.
-  
-  - `warning_recording`: The number of MQTT messages of the alarm data that can be cached. The default value is `2000`.
-  
-  - `Custom Wildcard`: You can add global parameters as wildcards and use them in the cloud service. The usage is `${Parameter Name}`, as shown in the figure below:  
+- Default Parameter
+
+  You can set the log level, the number of historical alarm and historical data in the default parameter.
+
+- Custom Parameter  
+
+  You can add common parameter to the custom parameter as wildcards and use them in the cloud service. The usage is `${Parameter Name}`, as shown in the figure below:  
     
     ![](images/2020-06-02-20-41-21.png)  
 
