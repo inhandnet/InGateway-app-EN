@@ -1,6 +1,6 @@
 # Device Supervisor App User Manual
 
-Device Supervisor App (Device Supervisor) allows users to collect and process data and upload data to the cloud conveniently and supports data parsing over multiple industrial protocols such as ISO on TCP and ModbusRTU. This manual takes collecting PLC data and uploading it to the ThingsBoard cloud platform as an example to describe how to collect PLC data and upload it to the cloud through Device Supervisor App. Hereinafter, InGateway501 is referred to as **IG501** and InGateway902 is referred to as **IG902**.
+Device Supervisor App (Device Supervisor) allows users to collect and process data and upload data to the cloud conveniently and supports data parsing over multiple industrial protocols such as ISO on TCP and ModbusRTU. This manual takes collecting PLC data and uploading it to the ThingsBoard cloud platform as an example to describe how to collect PLC data and upload it to the cloud through Device Supervisor App. Hereinafter, InGateway501 is referred to as **IG501** , InGateway502 is referred to as **IG502** and InGateway902 is referred to as **IG902**.
 
   - [Overview](#overview)
   - [1. Prepare the hardware and data collection environment](#prepare-hardware-equipment-and-its-data-collection-environment)
@@ -47,7 +47,7 @@ Device Supervisor App (Device Supervisor) allows users to collect and process da
 
 Prepare the following items:
 
-- Edge computing gateway IG501/IG902
+- Edge computing gateway IG501/IG502/IG902
 - PLC
 - Network cable/serial port cable
 - \*Firmware, SDKs, and apps required for software version update
@@ -81,13 +81,19 @@ The whole process is shown in the figure below:
   
   Power on IG902 and connect IG902 and the PLC through an Ethernet cable according to the topology.
   
-  ![](images/2020-06-15-18-54-34.png)
+  ![](images/2021-01-25-20-38-42.png)
+
+- Ethernet wiring for IG502
+  
+  Power on IG502 and connect IG502 and the PLC through an Ethernet cable according to the topology.
+  
+  ![](images/2021-01-25-20-39-20.png)
 
 - Ethernet wiring for IG501
   
   Power on IG501 and connect IG501 and the PLC through an Ethernet cable according to the topology.
   
-  ![](images/2020-06-15-18-58-05.png)
+  ![](images/2021-01-25-20-39-46.png)
 
 <a id="serial-wiring"> </a>
 
@@ -97,9 +103,19 @@ The whole process is shown in the figure below:
   
   Power on IG902 and connect IG902 and the PLC according to the topology.
   
-  ![](images/2020-06-15-19-00-04.png)
+  ![](images/2021-01-25-20-41-11.png)
   
   The following figure describes how to connect serial port terminals of IG902:
+  
+  ![](images/2020-07-13-11-36-38.png)
+
+- Serial port wiring for IG502
+  
+  Power on IG502 and connect IG502 and the PLC according to the topology.
+  
+  ![](images/2021-01-25-20-41-40.png)
+  
+  The following figure describes how to connect serial port terminals of IG502:
   
   ![](images/2020-07-13-11-36-38.png)
 
@@ -107,7 +123,7 @@ The whole process is shown in the figure below:
   
   Power on IG501 and connect IG501 and the PLC according to the topology.
   
-  ![](images/2020-06-15-19-02-24.png)
+  ![](images/2021-01-25-20-42-04.png)
   
   The following figure describes how to connect serial port terminals of IG501:
   
@@ -118,6 +134,7 @@ The whole process is shown in the figure below:
 ### 1.2 Configure InGateway to access PLC
 
 - The default IP address of IG902's GE 0/2 port is `192.168.2.1`. To enable IG902 to access the Ethernet-based PLC over the GE 0/2 port, you need to set the GE 0/2 port to be in the same network segment of the PLC. For more information about the setting method, see [Access the IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-lan-parameters).
+- The default IP address of IG502's LAN port is `192.168.2.1`. To enable IG502 to access the Ethernet-based PLC over the LAN port, you need to set the LAN port to be in the same network segment of the PLC. For more information about the setting method, see [Access the IG502](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#set-lan-parameters).
 - The default IP address of IG501's FE 0/1 port is `192.168.1.1`. To enable IG501 to access the Ethernet-based PLC over the FE 0/1 port, you need to set the FE 0/1 port to be in the same network segment of the PLC. For more information about the setting method, see [Access the IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-lan-parameters).
 
 <a id="set-wan-network-parameters"> </a>
@@ -125,6 +142,7 @@ The whole process is shown in the figure below:
 ### 1.3 Configure InGateway to connect Internet
 
 - Configure the IG902 to connect Internet by referring to [Connect IG902 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#set-wan-parameters).
+- Configure the IG502 to connect Internet by referring to [Connect IG502 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#set-wan-parameters).
 - Configure the IG501 to connect Internet by referring to [Connect IG501 to the Internet](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#set-wan-parameters).
 
 <a id="update-ingateway-device-software-version"> </a>
@@ -133,7 +151,8 @@ The whole process is shown in the figure below:
 
 If you want to get the latest InGateway and its functional characteristics, contact Customer Services. To update the software version, see the following links:
 
-- [Update the IG902 software version](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG902's firmware version must be `V2.0.0.r12537` or later, and the SDK version must be `py3sdk-V1.3.5` or later.
+- [Update the IG902 software version](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG902's firmware version must be `V2.0.0.r12537` or later, and the SDK version must be `py3sdk-V1.4.2` or later.
+- [Update the IG502 software version](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG502's firmware version must be `V2.0.0.r13595` or later, and the SDK version must be `py3sdk-V1.4.2` or later.
 - [Update the IG501 software version](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG501's firmware version must be `V2.0.0.r12884` or later, and the SDK version must be `py3sdk-V1.4.0` or later.
 
 <a id="configuration_device_supervisor_app"> </a>
@@ -148,6 +167,10 @@ If you want to get the latest InGateway and its functional characteristics, cont
 ### 2.1 Install and run Device Supervisor
 
 - Install and run Python apps on IG902 by referring to [Install and run Python apps on IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
+  
+  ![](images/2020-06-02-14-17-49.png)
+
+- Install and run Python apps on IG502 by referring to [Install and run Python apps on IG502](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
   
   ![](images/2020-06-02-14-17-49.png)
 
@@ -1040,7 +1063,7 @@ Custom subscribe message contains the following items:
   - `Parameter 2`: It is the received data. The data type is `string`.
   - `Parameter 3`: It is the API provided by Device Supervisor. For more information about it, see [Device Supervisor API Description.](#device_supervisor_api_description)
 
-The following are three common custom subscribe methods:
+The following are four common custom subscribe methods:
 
 <a id="sub-example1"> </a>
 
@@ -1415,7 +1438,7 @@ You can choose **Edge Computing > Device Supervisor > Parameter Settings** and c
 
 ### Gateway other configuration
 
-For more information about other common gateway operations, see [Get Started with IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html) or [Get Started with IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
+For more information about other common gateway operations, see [Get Started with IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html), [Get Started with IG502](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html) or [Get Started with IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html).
 
 <a id="thingsBoard_reference_flowchart"> </a>
 
