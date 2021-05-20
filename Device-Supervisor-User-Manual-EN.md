@@ -195,11 +195,11 @@ If you want to get the latest InGateway and its functional characteristics, cont
   
   Choose **Edge Computing > Device Supervisor > Device List**, and click **Add** PLC. On the device adding page, select **ISO on TCP** as the PLC protocol and configure the PLC communication parameters.<font color=#FF0000> Note: The device name must be unique.</font>
   
-  The following are examples of adding PLCs S7-1500, S7-1200, S7-400, S7-300, and S7-200 Smart (the mode is `Rack/Slot`). When the PLC S7-200 Smart is added, configure the rack number and slot number to 0 and 1 respectively. For other S7 series PLCs, use the default values 0 and 0 respectively.
+  The following are examples of adding PLCs S7-1500, S7-1200, S7-400, and S7-300(the mode is `Rack/Slot`). Configure the rack number and slot number to 0 and 1 respectively.
   
   ![](images/2020-06-02-14-19-45.png)
   
-  The following are examples of adding S7-200 and Siemens LOGO series PLCs (the mode is `TSAP`):
+  The following are examples of adding S7-200, S7-200 Smart and Siemens LOGO series PLCs (the mode is `TSAP`). <font color=#FF0000>Note: When adding S7-200 Smart, the Client TSAP configuration is 02.00, and the Server TSAP configuration is 02.01; the rest of the series are configured according to the actual situation.</font>
   
   ![](images/2020-06-02-14-20-32.png)
   
