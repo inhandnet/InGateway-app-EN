@@ -149,7 +149,7 @@ The whole process is shown in the figure below:
 
 ### 1.4 Update the InGateway software version
 
-If you want to get the latest InGateway and its functional characteristics, contact Customer Services. To update the software version, see the following links:
+If you want to get the latest InGateway and its functional characteristics, please visit the [Resource](https://www.inhandnetworks.com/downlist/cid-148/).  To update the software version, see the following links:
 
 - [Update the IG902 software version](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG902's firmware version must be `V2.0.0.r12537` or later, and the SDK version must be `py3sdk-V1.4.2` or later.
 - [Update the IG502 software version](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#update-the-software) To use Device Supervisor, IG502's firmware version must be `V2.0.0.r13595` or later, and the SDK version must be `py3sdk-V1.4.2` or later.
@@ -166,15 +166,15 @@ If you want to get the latest InGateway and its functional characteristics, cont
 
 ### 2.1 Install and run Device Supervisor
 
-- Install and run Python apps on IG902 by referring to [Install and run Python apps on IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
+- Install and run Python apps on IG902 by referring to [Install and run Python apps on IG902](http://manual.ig.inhandnetworks.com/en/latest/IG902-Quick-Start-Manual.html#install-and-run-python-app). To download Device Supervisor, please visit the [Resource](https://www.inhandnetworks.com/downlist/cid-148/). After Device Supervisor runs normally, the following figure is displayed:
   
   ![](images/2020-06-02-14-17-49.png)
 
-- Install and run Python apps on IG502 by referring to [Install and run Python apps on IG502](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
+- Install and run Python apps on IG502 by referring to [Install and run Python apps on IG502](http://manual.ig.inhandnetworks.com/en/latest/IG502-Quick-Start-Manual.html#install-and-run-python-app). To download Device Supervisor, please visit the [Resource](https://www.inhandnetworks.com/downlist/cid-148/). After Device Supervisor runs normally, the following figure is displayed:
   
   ![](images/2020-06-02-14-17-49.png)
 
-- Install and run Python apps on IG501 by referring to [Install and run Python apps on IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#install-and-run-python-app). After Device Supervisor runs normally, the following figure is displayed:
+- Install and run Python apps on IG501 by referring to [Install and run Python apps on IG501](http://manual.ig.inhandnetworks.com/en/latest/IG501-Quick-Start-Manual.html#install-and-run-python-app). To download Device Supervisor, please visit the [Resource](https://www.inhandnetworks.com/downlist/cid-148/). After Device Supervisor runs normally, the following figure is displayed:
   
   ![](images/2020-06-02-14-17-49.png)
 
