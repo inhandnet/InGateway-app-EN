@@ -1580,7 +1580,7 @@ Then, you can view the uploaded data in the latest telemeter of the device.
 #### View Log
 The log from the Python scripts can be viewed by going to Edge Computing -> Python Edge Computing and clicking the magnifying glass of the device_supervisor row.
 
- ![](images/2023-02-27 215623.png)
+ ![](images/2023-02-27-215623.png)
 
 <a id="faq"> </a>
 
