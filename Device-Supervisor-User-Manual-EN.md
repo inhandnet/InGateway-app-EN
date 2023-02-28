@@ -37,6 +37,7 @@ Device Supervisor App (Device Supervisor) allows users to collect and process da
       - [Add devices and assets](#add_devices_and_assets)
       - [Transmit the PLC data to ThingsBoard devices](#transmit_the_plc_data_to_thingsBoard_devices)
       - [Configure a visual dashboard](#configure_a_visual_dashboard)
+     - [View Log](#view_log)
   - [FAQ](#faq)
     - [Check whether the cloud service script is correct](#check-if-the-cloud-service-script-correct)
     - [Check whether the App's cloud service output is correct](#check-if-the-app-cloud-service-output-correct)
@@ -1573,6 +1574,12 @@ Then, you can view the uploaded data in the latest telemeter of the device.
   Then, you can use the switch to deliver control commands and view data trends through the trend charts.
   
   ![](images/2020-06-03-11-03-48.png)
+
+<a id="view_log"> </a>
+
+#### View Log
+The log from the Python scripts can be viewed by going to Edge Computing -> Python Edge Computing and clicking the magnifying glass of the device_supervisor row.
+ ![](images/2023-02-27 215623.png)
 
 <a id="faq"> </a>
 
